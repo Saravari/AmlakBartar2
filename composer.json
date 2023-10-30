@@ -1,0 +1,21 @@
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "yaghoob-piri",
+            "email": "116443049+Saravari@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "bramus/router": "*",
+        "jenssegers/blade": "*",
+        "rakit/validation": "*",
+        "robmorgan/phinx": "*",
+        "illuminate/database": "^8.83",
+        "phpmailer/phpmailer": "^6.8"
+    }
+}

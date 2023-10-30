@@ -1,0 +1,67 @@
+@font-face {
+    font-family: IranianSans;
+    src: url('../fonts/Iranian Sans.ttf');
+    font: weight normal;
+}
+*{  
+	margin: 0;
+}
+ul{
+	margin: 0;
+	padding: 0;
+}
+.submenu{
+    background: #f8f8f8;
+	width: 160px;
+	height: auto;
+	position: absolute;
+	top: 10px;
+	right: 165px;
+    display: none;
+}
+.submenu li{
+	list-style: none;
+	float: right;
+	position: relative;
+}
+.submenu li a,.submenu li p{
+	color: #333;
+	text-decoration: none;
+	float: right;
+	padding: 5px 25px;
+}
+.submenu li ul a:hover{
+	color:blue;
+	text-decoration:none;
+   }
+.flash {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-right: 90px;
+	vertical-align:middle;
+	border-right: 4px dashed;
+	border-right: 4px solid;
+	border-top: 4px solid transparent;
+	border-bottom: 4px solid transparent;
+}
+#mycard{	
+	background: #f8f8f8;
+	width: 300px;
+	height: auto;
+	padding-right: 15px;
+	padding-left: 15px;
+	position: absolute;
+	top: 45px;
+	right: 220px;
+	border-radius: 5px;
+	z-index: 1;
+}
+#myNavbar ul li button{
+	margin-top: 10px;
+
+}
+#search{
+	width: 300px;
+}
+
