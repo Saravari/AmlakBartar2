@@ -5,23 +5,21 @@ namespace AmlakBartar;
 use Rakit\Validation\Validator;
 use AmlakBartar\Models\User;
 
-
 class RegisterController extends HomeController
 {
-
     public function register()
     {
         $_SESSION['error'] = 0;
         $_SESSION['message'] = 0;
         $_SESSION['name'] = '';
         $_SESSION['email'] = '';
-       
+
         $this->render('users/register');
     }
 
     public function store()
     {
-        $validator = new Validator;
+        $validator = new Validator();
         $validation = $validator->validate($_POST + $_FILES, [
             'email'          => 'email',
             'password'       => 'min:6',
@@ -35,21 +33,20 @@ class RegisterController extends HomeController
             exit;
         }
 
-            $name = trim($_POST['name']);
-            $email = trim($_POST['email']);
-            $password = trim($_POST['password']);
-            $password_again = trim($_POST['password_again']);
-        if($name && $email && $password && $password_again){
+        $name = trim($_POST['name']);
+        $email = trim($_POST['email']);
+        $password = trim($_POST['password']);
+        $password_again = trim($_POST['password_again']);
+        if($name && $email && $password && $password_again) {
             if (!$this->loggedIn()) {
                 $password = md5($password);
-                $user = User::firstWhere('email',$email);
-                if($user){
+                $user = User::firstWhere('email', $email);
+                if($user) {
                     $_SESSION['error'] = 'این ایمیل : ' . $email . ' قبلا ثبت نام کرده است';
                     $_SESSION['name'] = $name;
                     $_SESSION['email'] = $email;
                     $this->render('users/register');
-                } else
-                {
+                } else {
                     User::insert([
                         'name' => $name,
                         'email' => $email,

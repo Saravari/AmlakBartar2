@@ -6,20 +6,18 @@ use Rakit\Validation\Validator;
 use App\Models\Melk;
 use App\Models\Image;
 
-
-
 class MelkController extends HomeController
 {
-
-    public function show(){
+    public function show()
+    {
 
         $id = trim($_POST['id']);
-        $_SESSION['melk'] = Melk::where('id',$id)->get();
-        foreach($_SESSION['melk'] as $melk){
+        $_SESSION['melk'] = Melk::where('id', $id)->get();
+        foreach($_SESSION['melk'] as $melk) {
             $_SESSION['lat'] = $melk->lat;
             $_SESSION['lng'] = $melk->lng;
         }
-        $_SESSION['image'] = Image::where('melk_id',$id)->get();
+        $_SESSION['image'] = Image::where('melk_id', $id)->get();
         $this->render('front/melk/melkInformation');
     }
 
@@ -41,54 +39,56 @@ class MelkController extends HomeController
         $this->render('front/melk/melk');
     }
 
-    public function Search(){
+    public function Search()
+    {
 
         $search = trim($_POST['search']);
-                           
-                $melks = Melk::orwhere('Sell_rent', 'LIKE', "{$search}%")->groupBy('status')->get();
-                    foreach($melks as $melk){
-                        $count = Melk::where('status',$melk->status)->count();
-                        echo
-                        "
+
+        $melks = Melk::orwhere('Sell_rent', 'LIKE', "{$search}%")->groupBy('status')->get();
+        foreach($melks as $melk) {
+            $count = Melk::where('status', $melk->status)->count();
+            echo
+            "
                         <input type='hidden' id='Sell_rent' value='$melk->Sell_rent'>
                         <input type='hidden' id='status' value='$melk->status'>
                         <hr />
                         <p><span>$melk->Sell_rent&nbsp$melk->status</span><b style='opacity: 0.5; float: left;'>$count آگهی</b></p>
-                        ";       
-                    }
+                        ";
+        }
 
-                $melks = Melk::where('status', 'LIKE', "{$search}%")->groupBy('Sell_rent')->get();
-                    foreach($melks as $melk){
-                        $count = Melk::where('status',$melk->status)->count();
-                        echo
-                        "
+        $melks = Melk::where('status', 'LIKE', "{$search}%")->groupBy('Sell_rent')->get();
+        foreach($melks as $melk) {
+            $count = Melk::where('status', $melk->status)->count();
+            echo
+            "
                         <input type='hidden' id='Sell_rent' value='$melk->Sell_rent'>
                         <input type='hidden' id='status' value='$melk->status'>
                         <hr />
                         <p><span>$melk->Sell_rent&nbsp$melk->status</span><b style='opacity: 0.5; float: left;'>$count آگهی</b></p>
-                        ";       
-                    }
+                        ";
+        }
 
-                $melks = Melk::where('district', 'LIKE', "{$search}%")->groupBy('district')->get();
-                    foreach($melks as $melk){
-                        $count = Melk::where('district', $melk->district)->count();
-                        echo
-                        "
+        $melks = Melk::where('district', 'LIKE', "{$search}%")->groupBy('district')->get();
+        foreach($melks as $melk) {
+            $count = Melk::where('district', $melk->district)->count();
+            echo
+            "
                         <input type='hidden' id='district' value='$melk->district'>
                         <hr />
                         <p><span>$melk->district</span><b style='opacity: 0.5; float: left;'>$count آگهی</b></p>
                         ";
-                    }
+        }
     }
 
-    public function districtSearch(){
+    public function districtSearch()
+    {
 
         $district = trim($_POST['district']);
-        $melks= Melk::all()->where('district', $district); 
-        foreach($melks as $melk){
+        $melks = Melk::all()->where('district', $district);
+        foreach($melks as $melk) {
             $melk_id = $melk->id;
             $image = Image::firstWhere('melk_id', $melk_id);
-                echo "
+            echo "
                 <div class='form-group'>
                     <div class='col-xs-6 col-md-3'>
                         <dive class='thumbnail'>
@@ -103,22 +103,23 @@ class MelkController extends HomeController
                     </div>
                 </div>
                 ";
-            }
+        }
     }
 
-    public function statusSearch(){
-        
+    public function statusSearch()
+    {
+
         $Sell_rent = trim($_POST['Sell_rent']);
         $status = trim($_POST['status']);
         $melks = Melk::where([
             'status' => $status,
             'Sell_rent' => $Sell_rent,
             ])->get();
-                foreach($melks as $melk){
-                    $melk_id = $melk->id;
-                    $image = Image::firstWhere('melk_id', $melk_id);
-                    if($melks){
-                        echo "
+        foreach($melks as $melk) {
+            $melk_id = $melk->id;
+            $image = Image::firstWhere('melk_id', $melk_id);
+            if($melks) {
+                echo "
                         <div class='form-group'>
                             <div class='col-xs-6 col-md-3'>
                                 <dive class='thumbnail'>
@@ -133,8 +134,8 @@ class MelkController extends HomeController
                             </div>
                         </div>
                         ";
-                    }
-            }  
+            }
+        }
     }
 
     public function store()
@@ -155,7 +156,7 @@ class MelkController extends HomeController
         $_SESSION['Floor'] =  trim($_POST['Floor']);
         $_SESSION['status'] =  trim($_POST['status']);
 
-        $validator = new Validator;
+        $validator = new Validator();
         $validation = $validator->validate($_POST + $_FILES, [
             'phone' => 'numeric'
         ]);
@@ -167,7 +168,7 @@ class MelkController extends HomeController
         }
 
         if (
-               !empty($_POST['owner'])
+            !empty($_POST['owner'])
             && !empty($_POST['phone'])
             && !empty($_POST['Address'])
             && !empty($_POST['Construction'])
@@ -175,8 +176,7 @@ class MelkController extends HomeController
             && !empty($_POST['Rooms'])
             && !empty($_POST['Floors'])
             && !empty($_POST['units'])
-            && !empty($_POST['Floor'])) 
-        {   
+            && !empty($_POST['Floor'])) {
 
             $owner = trim($_POST['owner']);
             $phone = trim($_POST['phone']);
@@ -221,7 +221,7 @@ class MelkController extends HomeController
                 ['Address', $Address],
                 ['owner', $_SESSION['name']]
                 ]);
-            if($melks){
+            if($melks) {
                 $_SESSION['error'] = ' ملک  ' . $Address . '  قبلا ثبت شده است';
                 $this->render('front/melk/melk');
             } else {
@@ -246,11 +246,11 @@ class MelkController extends HomeController
                     'lng' => $lng,
                 ]);
                 if (!empty(array_filter($_FILES['images']['name']))) {
-                    $melks = Melk::where('Address',$Address)->get();
-                    foreach($melks as $melk){
+                    $melks = Melk::where('Address', $Address)->get();
+                    foreach($melks as $melk) {
                         $melk_id = $melk->id;
                     }
-                    foreach($_FILES['images']['name'] as $id=>$val){
+                    foreach($_FILES['images']['name'] as $id => $val) {
 
                         $imageName = $_FILES['images']['name'][$id];
                         $imageType = $_FILES['images']['type'][$id];
@@ -288,14 +288,14 @@ class MelkController extends HomeController
 
     public function melkList()
     {
-        $melks = melk::firstWhere('owner',$_SESSION['name']);
-        if($melks){
-            $melks = melk::where('owner',$_SESSION['name'])->get();
-            $this->render('users/melkList',compact('melks'));
-        }else{
+        $melks = melk::firstWhere('owner', $_SESSION['name']);
+        if($melks) {
+            $melks = melk::where('owner', $_SESSION['name'])->get();
+            $this->render('users/melkList', compact('melks'));
+        } else {
             $_SESSION['error'] = "هیچ ملکی برای شما ثبت نشده است";
             $this->render('users/amlakbartar');
-        }   
+        }
     }
 
     public function melkEdit()
@@ -305,7 +305,7 @@ class MelkController extends HomeController
             ['Address', $Address],
             ['owner', $_SESSION['name']]
             ])->get();
-        foreach($melks as $melk){
+        foreach($melks as $melk) {
             $_SESSION['error'] = 0;
             $_SESSION['message'] = 0;
             $melk_id = $melk->id;
@@ -321,27 +321,27 @@ class MelkController extends HomeController
             $_SESSION['Elevator'] =  $melk->Elevator;
             $_SESSION['Parking'] =  $melk->Parking;
             $_SESSION['Sell_rent'] =  $melk->Sell_rent;
-            $_SESSION['location'] =  $melk->Location; 
-                     
+            $_SESSION['location'] =  $melk->Location;
+
         }
-        $images = Image::where('melk_id',$melk_id)->get();
-        
-        $this->render('users/melkEdit', compact('images'));   
+        $images = Image::where('melk_id', $melk_id)->get();
+
+        $this->render('users/melkEdit', compact('images'));
     }
 
     public function melkUpdate()
     {
 
         if (
-                !empty($_POST['owner'])
+            !empty($_POST['owner'])
             && !empty($_POST['phone'])
             && !empty($_POST['Address'])
             && !empty($_POST['Construction'])
             && !empty($_POST['Meterage'])
             && !empty($_POST['Floors'])
             && !empty($_POST['units'])
-            && !empty($_POST['Floor'])){ 
-        
+            && !empty($_POST['Floor'])) {
+
 
             $owner = trim($_POST['owner']);
             $phone = trim($_POST['phone']);
@@ -374,7 +374,7 @@ class MelkController extends HomeController
                 $location = "";
             }
 
-            Melk::where('owner',$_SESSION['name'])->update([
+            Melk::where('owner', $_SESSION['name'])->update([
                 'owner' => $owner,
                 'phone' => $phone,
                 'Address' => $Address,
@@ -392,16 +392,16 @@ class MelkController extends HomeController
             ]);
             $_SESSION['message'] = 'ویرایش ملک با موفقیت ثبت شد';
             $this->render('users/melkEdit');
-        }else {
+        } else {
             $_SESSION['error'] = 'لطفا فیلدهای خالی را وارد کنید';
             $this->render('users/melkEdit');
         }
 
     }
-    
+
     public function comments()
     {
-        $db = new DataBase;
+        $db = new DataBase();
         $row = $db->select("SELECT * FROM users WHERE id='" . $_SESSION['user_id'] . "'");
         $name = $row['name'];
         $email = $row['email'];
@@ -409,33 +409,33 @@ class MelkController extends HomeController
         $errors = 0;
         $message = 0;
 
-        $this->render('users/comments', compact('errors', 'error', 'message','name', 'email'));
+        $this->render('users/comments', compact('errors', 'error', 'message', 'name', 'email'));
     }
 
     public function commentStore()
     {
-        if(!empty($_POST['message'])){
+        if(!empty($_POST['message'])) {
             $description = $_POST['message'];
             $name = $_POST['name'];
             $email = $_POST['email'];
             $error = 0;
             $errors = 0;
 
-            $db = new DataBase;
-            if($db->insert("INSERT  INTO comments VALUES ('','" . $_SESSION['user_id'] . "','$name','$email','$description')") ){
+            $db = new DataBase();
+            if($db->insert("INSERT  INTO comments VALUES ('','" . $_SESSION['user_id'] . "','$name','$email','$description')")) {
                 $message = 'پیام شما با موفقیت ارسال شد';
-                $this->render('users/comments', compact('errors', 'error', 'message','name','email'));
+                $this->render('users/comments', compact('errors', 'error', 'message', 'name', 'email'));
             }
 
-        }else{
+        } else {
             $name = $_POST['name'];
             $email = $_POST['email'];
             $error = 'لطفا پیشنهاد خود را بنویسید';
             $errors = 0;
             $message = 0;
-            $this->render('users/comments', compact('errors', 'error', 'message','name','email'));
+            $this->render('users/comments', compact('errors', 'error', 'message', 'name', 'email'));
         }
-        
+
 
     }
 }

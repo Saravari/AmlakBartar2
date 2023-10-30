@@ -6,33 +6,33 @@ use Phinx\Migration\AbstractMigration;
 
 final class MelksTableMigraion extends AbstractMigration
 {
-        public function up()
-        {
-                $table = $this->table('melks');
-                $table->addColumn('owner', 'string', ['limit' => 30, 'null' => false])
-                        ->addColumn('phone', 'string', ['limit' => 100, 'null' => false])
-                        ->addColumn('Address', 'text', ['null' => false])
-                        ->addColumn('district', 'text', ['null' => false])
-                        ->addColumn('Construction', 'integer', ['signed' => false, 'null' => false])
-                        ->addColumn('Meterage', 'integer', ['signed' => false, 'null' => false])
-                        ->addColumn('Rooms', 'integer', ['signed' => false, 'null' => false])
-                        ->addColumn('Direction', 'string', ['limit' => 10, 'null' => false])
-                        ->addColumn('Floors', 'integer', ['signed' => false, 'null' => false])
-                        ->addColumn('units', 'integer', ['signed' => false, 'null' => false])
-                        ->addColumn('Floor', 'integer', ['signed' => false, 'null' => false])
-                        ->addColumn('Elevator', 'boolean', ['default' => false])
-                        ->addColumn('Parking', 'boolean', ['default' => false])
-                        ->addColumn('status', 'string', ['limit' => 20, 'null' => false])
-                        ->addColumn('Sell_rent', 'string', ['limit' => 10, 'null' => false])
-                        ->addColumn('description', 'text', ['null' => true])
-                        ->addColumn('lat', 'string', ['limit' => 255, 'null' => true])
-                        ->addColumn('lng', 'string', ['limit' => 255, 'null' => true]);
-                $table->save();
-        }
+    public function up()
+    {
+        $table = $this->table('melks');
+        $table->addColumn('owner', 'string', ['limit' => 30, 'null' => false])
+                ->addColumn('phone', 'string', ['limit' => 100, 'null' => false])
+                ->addColumn('Address', 'text', ['null' => false])
+                ->addColumn('district', 'text', ['null' => false])
+                ->addColumn('Construction', 'integer', ['signed' => false, 'null' => false])
+                ->addColumn('Meterage', 'integer', ['signed' => false, 'null' => false])
+                ->addColumn('Rooms', 'integer', ['signed' => false, 'null' => false])
+                ->addColumn('Direction', 'string', ['limit' => 10, 'null' => false])
+                ->addColumn('Floors', 'integer', ['signed' => false, 'null' => false])
+                ->addColumn('units', 'integer', ['signed' => false, 'null' => false])
+                ->addColumn('Floor', 'integer', ['signed' => false, 'null' => false])
+                ->addColumn('Elevator', 'boolean', ['default' => false])
+                ->addColumn('Parking', 'boolean', ['default' => false])
+                ->addColumn('status', 'string', ['limit' => 20, 'null' => false])
+                ->addColumn('Sell_rent', 'string', ['limit' => 10, 'null' => false])
+                ->addColumn('description', 'text', ['null' => true])
+                ->addColumn('lat', 'string', ['limit' => 255, 'null' => true])
+                ->addColumn('lng', 'string', ['limit' => 255, 'null' => true]);
+        $table->save();
+    }
 
-        public function down()
-        {
-                $this->table('images')->drop()->save();
-                $this->table('melks')->drop()->save();
-        }
+    public function down()
+    {
+        $this->table('images')->drop()->save();
+        $this->table('melks')->drop()->save();
+    }
 }

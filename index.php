@@ -3,7 +3,7 @@
 require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/database.php';
 
-session_start(); 
+session_start();
 
 $app = new \Bramus\Router\Router();
 $app->setNamespace('\App\Controllers\front');
@@ -25,10 +25,10 @@ $app->post('/store', 'RegisterController@store');
 
 //routes of melk
 $app->get('/melk', 'MelkController@melk');
-$app->post('/search','MelkController@search');
-$app->post('/districtSearch','MelkController@districtSearch');
-$app->post('/statusSearch','MelkController@statusSearch');
-$app->post('/melkInformation','MelkController@show');
+$app->post('/search', 'MelkController@search');
+$app->post('/districtSearch', 'MelkController@districtSearch');
+$app->post('/statusSearch', 'MelkController@statusSearch');
+$app->post('/melkInformation', 'MelkController@show');
 $app->get('/melks', 'MelkController@index');
 $app->post('/melkEdit', 'MelkController@edit');
 $app->post('/melkStore', 'MelkController@store');

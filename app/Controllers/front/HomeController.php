@@ -9,17 +9,14 @@ use PHPMailer\PHPMailer\Exception;
 use App\Models\Melk;
 use App\Models\Image;
 
-
-
-
 class HomeController
 {
-    public  function render($template, $data = [])
+    public function render($template, $data = [])
     {
         echo $this->returnTemplate($template, $data);
     }
 
-    public  function returnTemplate($template, $data = [])
+    public function returnTemplate($template, $data = [])
     {
         $blade = new LaravelBlade('./resources/views/', 'cache');
         $file = './resources/views/' . $template . '.blade.php';
@@ -31,27 +28,27 @@ class HomeController
         }
     }
 
-    function loggedIn()
+    public function loggedIn()
     {
-        if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])){
+        if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
-    function home()
+    public function home()
     {
-        
+
         $_SESSION['melks'] = Melk::all();
         $_SESSION['image'] = Image::all();
 
         $this->render('front/home');
     }
 
-    public  function sendEmail($to, $code)
+    public function sendEmail($to, $code)
     {
-        
+
         $mail = new PHPMailer(true);
 
         $mail->isSMTP();
@@ -61,8 +58,8 @@ class HomeController
         $mail->Password = 'cfa53d68dcdf8e';
         $mail->SMTPSecure = "TLS";
         $mail->Port = 2525;
-        
-        $mail->setFrom('amlakbartar@code.com','Code');
+
+        $mail->setFrom('amlakbartar@code.com', 'Code');
         $mail->addAddress($to);
         $mail->isHTML(true);
         $mail->Subject = 'Verification code';
@@ -70,7 +67,7 @@ class HomeController
         try {
             $mail->send();
             $msg = 'true';
-            } catch (Exception $e) {
+        } catch (Exception $e) {
             $msg = 'false';
         }
 
