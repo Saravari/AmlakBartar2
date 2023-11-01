@@ -17,7 +17,6 @@ class AuthController extends HomeController
             $msg = $this->sendEmail($email, $code);
             if($msg) {
                 $_SESSION['user_id'] = $user->id;
-                $_SESSION['name'] = $user->name;
                 echo $msg;
             }
         } else {
@@ -37,7 +36,7 @@ class AuthController extends HomeController
         }
     }
 
-    public function enterPassword()
+    /*public function enterPassword()
     {
         $_SESSION['error'] = 0;
         $_SESSION['message'] = 0;
@@ -76,7 +75,7 @@ class AuthController extends HomeController
             $_SESSION['error'] = " کلمه عبور اشتباه است";
             $this->render('users/enterPassword');
         }
-    }
+    }*/
 
     public function profile()
     {

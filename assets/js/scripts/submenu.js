@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-  $(".dropdown-menu li").css("cursor", "pointer");
+  $(".dropdown-menu a").css("cursor", "pointer");
   $("#dropdown").click(function () {
     $("#mycard").css('display','none');
     $("#search").val('');
@@ -7,7 +7,6 @@
   $(".dropdown-menu li").hover(
     function () {
       $(this).find(".submenu").slideDown("2000");
-      $(this).find(".submenu").css("cursor", "pointer");
     },
     function () {
       $(this).find(".submenu").slideUp("2000");
@@ -29,7 +28,7 @@
         if(result!=''){
           $("#mysearch").html(result);
         }else{
-          $("#mysearch").html('موردی یافت نشد!');
+          $("#mysearch").html('<div class = "alert alert-danger">موردی یافت نشد!</div>');
         }
       },
     });

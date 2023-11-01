@@ -22,13 +22,13 @@ $(document).ready(function () {
             var temp = $("input#temp").val();
             if (result == "true" && temp == "#Advertising") {
               $(modal).modal("hide");
-              window.location.href = "/melk";
+              window.location.href = "/melkRegister";
             } else if (result == "true" && temp == "#login") {
               $(modal).modal("hide");
               var tagA = $("a[href='#login']");
               $(tagA).html("خروج").css('color','red');
               $(tagA).attr('href','/logOut');
-              $("a[href='#Advertising']").attr('href','/melk');
+              $("a[href='#Advertising']").attr('href','/melkRegister');
               $(tagA).html("خروج").css('color','red');
             } else {
               $(modal).find("#display").html(result);

@@ -55,14 +55,14 @@
                 <div class="carousel-inner" role="listbox">
                     @foreach($_SESSION['image'] as $image)
                     <div class="item active">
-                        <img src="assets/images/{{$image->image}}">
+                        <img src="assets/images/{{$image->image}}" width="400" height="250">
                     </div>
                     @break
                     @endforeach
 
                     @foreach($_SESSION['image'] as $image)
                     <div class="item">
-                    <img src="assets/images/{{$image->image}}">
+                        <img src="assets/images/{{$image->image}}" width="400" height="250">
                     </div>
                     @endforeach
 

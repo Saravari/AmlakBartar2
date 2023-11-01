@@ -19,8 +19,14 @@
             <div class="form col-xs-8 col-sm-6" style="background-color:DarkGray ;">
 
                 <div class="form-group">
-                    <h4><input type="radio" class="Sell_rent" name="Sell_rent" value="فروش" checked> فروش
+                    <h4>
+                        @if($_SESSION['Sell_rent'])
+                        <input type="radio" class="Sell_rent" name="Sell_rent" value="{{$_SESSION['Sell_rent']}}" checked> {{$_SESSION['Sell_rent']}}
                         <input type="radio" class="Sell_rent" name="Sell_rent" value="اجاره"> اجاره
+                        @else
+                        <input type="radio" class="Sell_rent" name="Sell_rent" value="فروش" checked> فروش
+                        <input type="radio" class="Sell_rent" name="Sell_rent" value="اجاره"> اجاره
+                        @endif
                     </h4>
                 </div>
 
@@ -40,7 +46,11 @@
                 </div>
                 <div class="form-group">
                     <select name="district" class="form-control">
+                        @if($_SESSION['district'])
+                        <option value="{{$_SESSION['district']}}">{{$_SESSION['district']}}</option>
+                        @else
                         <option value="افسریه">-- افسریه --</option>
+                        @endif
                         <option value="الهیه">الهیه</option>
                         <option value="بهشتی">بهشتی</option>
                         <option value="پاسداران">پاسداران</option>
@@ -58,7 +68,11 @@
 
                 <div class="form-group">
                     <select name="status" class="form-control">
+                        @if($_SESSION['status'])
+                        <option value="{{$_SESSION['status']}}">{{$_SESSION['status']}}</option>
+                        @else
                         <option value="آپارتمان">-- آپارتمان --</option>
+                        @endif
                         <option value="خانه و ویلا">خانه و ویلا</option>
                         <option value="زمین و کلنگی">زمین و کلنگی</option>
                         <option value="دفتر کار">دفتر کار</option>
@@ -84,7 +98,11 @@
 
                 <div class="form-group">
                     <select name="Direction" class="form-control">
+                        @if($_SESSION['Direction'])
+                        <option value="{{$_SESSION['Direction']}}">{{$_SESSION['Direction']}}</option>
+                        @else
                         <option value="شمالی">-- شمالی --</option>
+                        @endif
                         <option value="جنوبی">جنوبی</option>
                         <option value="شرقی">شرقی</option>
                         <option value="غربی">غربی</option>
@@ -110,8 +128,10 @@
             <div class="form col-xs-8 col-sm-6" style="background-color:DarkGray;"><br /><br />
 
                 <div class="form-group">
-                    <h4><input type="checkbox" name="Elevator" value="1"> آسانسور 
-                    <input type="checkbox" name="Parking" value="1"> پارکینگ</h4>
+                <h4>
+                        <input type="checkbox" name="Elevator" value="1"> آسانسور 
+                        <input type="checkbox" name="Elevator" value="1"> پارکینگ 
+                </h4>
                 </div>
 
                 <div class="row form-group">

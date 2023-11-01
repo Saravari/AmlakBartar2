@@ -1,7 +1,7 @@
 $(document).ready(function () {
-  $(document).click(function(){
+  $(document).click(function () {
     $("#mycard").css("display", "none");
-    $("#search").val('');
+    $("#search").val("");
   });
   $("#search").keyup(function () {
     $("#mycard").css("display", "inline");
@@ -15,35 +15,36 @@ $(document).ready(function () {
           $("#mycard").html(result).css("cursor", "pointer");
           $("#mycard span").hover(
             function () {
-              $(this).css({ color: "blue"});
+              $(this).css({ color: "blue" });
             },
             function () {
               $(this).css("color", "black");
             }
           );
-          $("#mycard").click(function () {
-            var district = $("#mycard span").html();
-            if(district==$("#mycard input").val()){
+          $("#mycard span").click(function () {
+            var span_class = $(this).attr("class");
+            if (span_class == "district") {
+              data = $(this).html();
               $.ajax({
                 type: "POST",
                 url: "/districtSearch",
-                data: { district: district },
+                data: { district: data },
                 success: function (result) {
                   $("#mysearch").html(result);
                 },
               });
-            }else{
-              var Sell_rent = $("#mycard #Sell_rent").val();
-              var status = $("#mycard #status").val();
+            } else {
+              var status = $(this).attr("id");
+              var Sell_rent = $(this).attr("class");
               $.ajax({
                 type: "POST",
                 url: "/statusSearch",
-                data: { Sell_rent: Sell_rent , status: status },
+                data: { status: status, Sell_rent: Sell_rent },
                 success: function (result) {
-                  if(result!=''){
+                  if (result != "") {
                     $("#mysearch").html(result);
-                  }else{
-                    $("#mysearch").html('موردی یافت نشد!');
+                  } else {
+                    $("#mysearch").html("موردی یافت نشد!");
                   }
                 },
               });

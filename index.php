@@ -24,12 +24,12 @@ $app->get('/register', 'RegisterController@index');
 $app->post('/store', 'RegisterController@store');
 
 //routes of melk
-$app->get('/melk', 'MelkController@melk');
+$app->get('/melkRegister', 'MelkController@melkRegister');
 $app->post('/search', 'MelkController@search');
 $app->post('/districtSearch', 'MelkController@districtSearch');
 $app->post('/statusSearch', 'MelkController@statusSearch');
-$app->post('/melkInformation', 'MelkController@show');
-$app->get('/melks', 'MelkController@index');
+$app->post('/melkInformation', 'MelkController@showInformation');
+$app->get('/melkList', 'MelkController@melkList');
 $app->post('/melkEdit', 'MelkController@edit');
 $app->post('/melkStore', 'MelkController@store');
 $app->post('/melkUpdate', 'MelkController@update');
