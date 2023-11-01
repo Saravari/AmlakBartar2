@@ -47,7 +47,7 @@ class MelkController extends HomeController
         $melks = Melk::orwhere('Sell_rent', 'LIKE', "{$search}%")->groupBy('status')->get();
 
         foreach($melks as $melk) {
-            $count = Melk::where('status', $melk->status)->count();
+            $count = Melk::where('Sell_rent', $melk->Sell_rent)->count();
             echo
             "
                         <hr />
@@ -58,7 +58,7 @@ class MelkController extends HomeController
         $melks = Melk::where('status', 'LIKE', "{$search}%")->groupBy('Sell_rent')->get();
         
         foreach($melks as $melk) {
-            $count = Melk::where('status', $melk->status)->count();
+            $count = Melk::where('Sell_rent', $melk->Sell_rent)->count();
             echo
             "
                         <hr />
