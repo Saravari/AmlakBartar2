@@ -13,15 +13,5 @@
                         <button class="btn btn-danger btn-sm" onclick="location.href='{{'logOut'}}'; ">خروج</button>
                     </li>
             </ul>
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a data-toggle="dropdown" href="#">کارهای ملکی<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{'melk'}}">ثبت ملک جدید</a></li>
-                            <li><a href="{{'melkList'}}" >ویرایش ملک</a></li>
-                        </ul>
-                </li>
-                <li class="col-sx-2"><a href="{{'profile'}}">ویرایش پروفایل</a></li>
-            </ul>
         </div>
 </nav>

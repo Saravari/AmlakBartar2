@@ -47,35 +47,45 @@ class MelkController extends HomeController
         $melks = Melk::orwhere('Sell_rent', 'LIKE', "{$search}%")->groupBy('status')->get();
 
         foreach($melks as $melk) {
-            $count = Melk::where('Sell_rent', $melk->Sell_rent)->count();
+            $count = Melk::where([
+                'status' => $melk->status,
+                'Sell_rent' => $melk->Sell_rent,
+                ])->count();
             echo
-            "
-                        <hr />
-                        <p><span id='$melk->status' class='$melk->Sell_rent'>$melk->Sell_rent&nbsp$melk->status</span><b style='opacity: 0.5; float: left;'>$count آگهی</b></p>
-                        ";
+                "
+                    <hr />
+                    <p><span id='$melk->status' class='$melk->Sell_rent'>$melk->Sell_rent&nbsp$melk->status</span><b style='opacity: 0.5; float: left;'>$count آگهی</b></p>
+                ";
         }
+            
 
         $melks = Melk::where('status', 'LIKE', "{$search}%")->groupBy('Sell_rent')->get();
         
         foreach($melks as $melk) {
-            $count = Melk::where('Sell_rent', $melk->Sell_rent)->count();
+            $count = Melk::where([
+                'status' => $melk->status,
+                'Sell_rent' => $melk->Sell_rent,
+                ])->count();
             echo
-            "
-                        <hr />
-                        <p><span id='$melk->status' class='$melk->Sell_rent'>$melk->Sell_rent&nbsp$melk->status</span><b style='opacity: 0.5; float: left;'>$count آگهی</b></p>
-                        ";
+                "
+                    <hr />
+                    <p><span id='$melk->status' class='$melk->Sell_rent'>$melk->Sell_rent&nbsp$melk->status</span><b style='opacity: 0.5; float: left;'>$count آگهی</b></p>
+                ";
         }
 
-        $melks = Melk::where('district', 'LIKE', "{$search}%")->groupBy('district')->get();
+        $melks = Melk::where('district', 'LIKE', "{$search}%")->groupBy('Sell_rent')->get();
         foreach($melks as $melk) {
-            $count = Melk::where('district', $melk->district)->count();
+            $count = Melk::where([
+                'district' => $melk->district,
+                'Sell_rent' => $melk->Sell_rent,
+                ])->count();
             echo
-            "
-                        <input type='hidden' class='district' value='$melk->district'>
-                        <hr />
-                        <p><span class='district'>$melk->district</span><b style='opacity: 0.5; float: left;'>$count آگهی</b></p>
-                        ";
+                "
+                <hr />
+                <p><span class='district'>$melk->district</span><b style='opacity: 0.5; float: left;'>$count آگهی</b></p>
+                ";       
         }
+                        
     }
 
     public function districtSearch()
@@ -187,9 +197,17 @@ class MelkController extends HomeController
         $_SESSION['units'] =  trim($_POST['units']);
         $_SESSION['Floor'] =  trim($_POST['Floor']);
         $_SESSION['Sell_rent'] =  trim($_POST['Sell_rent']);
-        $_SESSION['Elevator'] =  trim($_POST['Elevator']);
-        $_SESSION['Parking'] =  trim($_POST['Parking']);
-
+        if (!empty($_POST['Elevator'])) {
+            $_SESSION['Elevator'] = trim($_POST['Elevator']);
+        } else {
+            $_SESSION['Elevator'] = 0;
+        }
+        if (!empty($_POST['Parking'])) {
+            $_SESSION['Parking'] = trim($_POST['Parking']);
+        } else {
+            $_SESSION['Parking'] = 0;
+        }
+        
         $validator = new Validator();
         $validation = $validator->validate($_POST + $_FILES, [
             'phone' => 'numeric'
@@ -228,12 +246,12 @@ class MelkController extends HomeController
             if (!empty($_POST['Elevator'])) {
                 $Elevator = trim($_POST['Elevator']);
             } else {
-                $Elevator = "";
+                $Elevator = 0;
             }
             if (!empty($_POST['Parking'])) {
                 $Parking = trim($_POST['Parking']);
             } else {
-                $Parking = "";
+                $Parking = 0;
             }
             $Sell_rent = trim($_POST['Sell_rent']);
             if (!empty($_POST['description'])) {
@@ -257,9 +275,11 @@ class MelkController extends HomeController
                 ['owner', $_SESSION['name']]
                 ]);
             if($melks) {
+
                 $_SESSION['error'] = ' ملک  ' . $Address . '  قبلا ثبت شده است';
                 $this->render('front/melk/melkRegister');
-            } else {
+
+            } elseif (!empty(array_filter($_FILES['images']['name']))) {
                 Melk::insert([
                     'owner' => $owner,
                     'phone' => $phone,
@@ -280,9 +300,8 @@ class MelkController extends HomeController
                     'lat' => $lat,
                     'lng' => $lng,
                 ]);
-                if (!empty(array_filter($_FILES['images']['name']))) {
-                    $melks = Melk::where('Address', $Address)->get();
-                    foreach($melks as $melk) {
+                $melks = Melk::firstWhere('Address',$Address)->get();
+                    foreach($melks as $melk){
                         $melk_id = $melk->id;
                     }
                     foreach($_FILES['images']['name'] as $id => $val) {
@@ -298,23 +317,42 @@ class MelkController extends HomeController
                         }
                         if (($extension == 'jpg' || $extension == 'jpeg') && $imageType == 'image/jpeg') {
                             if (move_uploaded_file($tmp_name, $dir . $imageName)) {
-                                Image::insert([
-                                    'melk_id' => $melk_id,
-                                    'image' => $imageName,
-                                ]);
-                                $_SESSION['message'] = 'ملک شما با موفقیت ثبت شد';
-                                $this->render('front/melk/melkRegister');
-                            }
+                                    Image::insert([
+                                        'melk_id' => $melk_id,
+                                        'image' => $imageName,
+                                    ]);
+                                }
                         } else {
                             $_SESSION['error'] = 'تصویر باید از نوع jpg/jpeg باشد';
                             $this->render('front/melk/melkRegister');
                         }
                     }
+                    $_SESSION['message'] = 'ملک شما با موفقیت ثبت شد';
+                    $this->render('front/melk/melkRegister');
                 } else {
+                    Melk::insert([
+                        'owner' => $owner,
+                        'phone' => $phone,
+                        'Address' => $Address,
+                        'district' => $district,
+                        'Construction' => $Construction,
+                        'Meterage' => $Meterage,
+                        'Rooms' => $Rooms,
+                        'Direction' => $Direction,
+                        'Floors' => $Floors,
+                        'units' => $units,
+                        'Floor' => $Floor,
+                        'status' => $status,
+                        'Elevator' => $Elevator,
+                        'Parking' => $Parking,
+                        'description' => $description,
+                        'Sell_rent' => $Sell_rent,
+                        'lat' => $lat,
+                        'lng' => $lng,
+                    ]);
                     $_SESSION['message'] = 'ملک شما با موفقیت ثبت شد';
                     $this->render('front/melk/melkRegister');
                 }
-            }
         } else {
             $_SESSION['error'] = 'لطفا فیلدهای خالی را وارد کنید';
             $this->render('front/melk/melkRegister');
@@ -390,12 +428,12 @@ class MelkController extends HomeController
             if (!empty($_POST['Elevator'])) {
                 $Elevator = trim($_POST['Elevator']);
             } else {
-                $Elevator = "";
+                $Elevator = 0;
             }
             if (!empty($_POST['Parking'])) {
                 $Parking = trim($_POST['Parking']);
             } else {
-                $Parking = "";
+                $Parking = 0;
             }
             $Sell_rent = trim($_POST['Sell_rent']);
             if (!empty($_POST['description'])) {

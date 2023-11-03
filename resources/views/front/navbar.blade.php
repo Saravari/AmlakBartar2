@@ -15,7 +15,9 @@
                     <li style="margin: 0;"><a>فروش<span class="flash"></span></a>
                         <ul class="submenu">
                             <li>
-                                <h4><p>فروش مسکونی</p></h4>
+                                <h4>
+                                    <p>فروش مسکونی</p>
+                                </h4>
                                 <ul>
                                     <li><a class="sell">آپارتمان</a>
                                     <li><a class="sell">خانه و ویلا</a>
@@ -23,7 +25,9 @@
                                 </ul>
                             </li>
                             <li>
-                                <h4><p>فروش دفاتر اداری</p></h4>
+                                <h4>
+                                    <p>فروش دفاتر اداری</p>
+                                </h4>
                                 <ul>
                                     <li><a class="sell">دفتر کار</a>
                                     <li><a class="sell">مغازه</a>
@@ -32,17 +36,21 @@
                             </li>
                         </ul>
                     </li>
-                    <li style="margin: 0;"><a>اجاره  <span class="flash"></span></a>
+                    <li style="margin: 0;"><a>اجاره <span class="flash"></span></a>
                         <ul class="submenu">
                             <li>
-                                <h4><p>اجاره مسکونی</p></h4>
+                                <h4>
+                                    <p>اجاره مسکونی</p>
+                                </h4>
                                 <ul>
                                     <li><a class="rent">آپارتمان</a>
                                     <li><a class="rent">خانه و ویلا</a>
                                 </ul>
                             </li>
                             <li>
-                                <h4><p>اجاره دفاتر اداری</p></h4>
+                                <h4>
+                                    <p>اجاره دفاتر اداری</p>
+                                </h4>
                                 <ul>
                                     <li><a class="rent">دفتر کار</a>
                                     <li><a class="rent">مغازه</a>
@@ -57,8 +65,8 @@
         <ul class="nav navbar-nav">
             <div class="navbar-form" role="search">
                 <div class="form-group">
-                <span><i class="fa fa-search"></i></span>  
-                <input type="text" id="search" name="search" class="form-control" placeholder="همه آگهی ها">
+                    <span><i class="fa fa-search"></i></span>
+                    <input type="text" id="search" name="search" class="form-control" placeholder="همه آگهی ها">
                 </div>
             </div>
         </ul>
@@ -67,7 +75,8 @@
                 <a href="#login" data-toggle="modal" class="btn-lg modal-open" style="color:blue; margin:0;">ورود</a>
             </li>
             <li class="nav navbar-nav">
-                <a href="#Advertising" data-toggle="modal" class="btn alert-danger btn-lg modal-open" style="color:blue; margin:0">ثبت آگهی</a>
+                <a href="#Advertising" data-toggle="modal" class="btn alert-danger btn-lg modal-open"
+                    style="color:blue; margin:0">ثبت آگهی</a>
             </li>
         </ul>
     </div>
@@ -77,7 +86,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">ورود به حساب کاربری</h4>
             </div>
@@ -102,7 +111,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">ورود به حساب کاربری</h4>
             </div>
@@ -128,22 +137,22 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">وارد کردن کد تایید</h4>
             </div>
             <div class="modal-body">
                 <p>کد تایید را وارد کنید</p>
 
-                    <div class="row form-group">
-                        <label class="col-xs-4 col-md-2" for="code">کد تایید:</label>
-                        <input class="col-xs-8 col-md-9" type="code" class="form-control" placeholder="کد تایید"
-                            id="code" name="code">
-                    </div>
-                    <div id="display" style="color:red;"></div>
-                    <div class="modal-footer">
-                        <button type="submit" id="send" class="btn btn-primary">تایید</button>
-                    </div>
+                <div class="row form-group">
+                    <label class="col-xs-4 col-md-2" for="code">کد تایید:</label>
+                    <input class="col-xs-8 col-md-9" type="code" class="form-control" placeholder="کد تایید" id="code"
+                        name="code">
+                </div>
+                <div id="display" style="color:red;"></div>
+                <div class="modal-footer">
+                    <button type="submit" id="send" class="btn btn-primary">تایید</button>
+                </div>
             </div>
         </div>
     </div>

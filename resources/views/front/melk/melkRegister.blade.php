@@ -20,13 +20,8 @@
 
                 <div class="form-group">
                     <h4>
-                        @if($_SESSION['Sell_rent'])
-                        <input type="radio" class="Sell_rent" name="Sell_rent" value="{{$_SESSION['Sell_rent']}}" checked> {{$_SESSION['Sell_rent']}}
-                        <input type="radio" class="Sell_rent" name="Sell_rent" value="اجاره"> اجاره
-                        @else
                         <input type="radio" class="Sell_rent" name="Sell_rent" value="فروش" checked> فروش
                         <input type="radio" class="Sell_rent" name="Sell_rent" value="اجاره"> اجاره
-                        @endif
                     </h4>
                 </div>
 
@@ -48,9 +43,9 @@
                     <select name="district" class="form-control">
                         @if($_SESSION['district'])
                         <option value="{{$_SESSION['district']}}">{{$_SESSION['district']}}</option>
-                        @else
-                        <option value="افسریه">-- افسریه --</option>
                         @endif
+                        <option value="انتخاب منطقه">-- انتخاب منطقه --</option>
+                        <option value="افسریه">افسریه</option> 
                         <option value="الهیه">الهیه</option>
                         <option value="بهشتی">بهشتی</option>
                         <option value="پاسداران">پاسداران</option>
@@ -73,6 +68,7 @@
                         @else
                         <option value="آپارتمان">-- آپارتمان --</option>
                         @endif
+                        <option value="آپارتمان">آپارتمان</option>
                         <option value="خانه و ویلا">خانه و ویلا</option>
                         <option value="زمین و کلنگی">زمین و کلنگی</option>
                         <option value="دفتر کار">دفتر کار</option>
@@ -103,6 +99,7 @@
                         @else
                         <option value="شمالی">-- شمالی --</option>
                         @endif
+                        <option value="شمالی">شمالی</option>
                         <option value="جنوبی">جنوبی</option>
                         <option value="شرقی">شرقی</option>
                         <option value="غربی">غربی</option>
@@ -130,7 +127,7 @@
                 <div class="form-group">
                 <h4>
                         <input type="checkbox" name="Elevator" value="1"> آسانسور 
-                        <input type="checkbox" name="Elevator" value="1"> پارکینگ 
+                        <input type="checkbox" name="Parking" value="1"> پارکینگ 
                 </h4>
                 </div>
 
