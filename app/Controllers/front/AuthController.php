@@ -115,6 +115,7 @@ class AuthController extends HomeController
     {
         session_destroy();
         $this->render('front/home');
+    
     }
 
 }

@@ -73,16 +73,19 @@ class MelkController extends HomeController
                 ";
         }
 
-        $melks = Melk::where('district', 'LIKE', "{$search}%")->groupBy('Sell_rent')->get();
+        $melks = Melk::where('district', 'LIKE', "{$search}%")->groupBy('status')->groupBy('Sell_rent')->get();
+        
         foreach($melks as $melk) {
             $count = Melk::where([
-                'district' => $melk->district,
-                'Sell_rent' => $melk->Sell_rent,
-                ])->count();
+            'district' => $melk->district,
+            'status' => $melk->status,
+            ])->count();
+        
+
             echo
                 "
                 <hr />
-                <p><span class='district'>$melk->district</span><b style='opacity: 0.5; float: left;'>$count آگهی</b></p>
+                <p><span  class='district' district='$melk->district' id='$melk->status' name='$melk->Sell_rent'>$melk->district&nbsp$melk->Sell_rent&nbsp$melk->status</span><b style='opacity: 0.5; float: left;'>$count آگهی</b></p>
                 ";       
         }
                         
@@ -92,7 +95,14 @@ class MelkController extends HomeController
     {
 
         $district = trim($_POST['district']);
-        $melks = Melk::all()->where('district', $district);
+        $Sell_rent = trim($_POST['Sell_rent']);
+        $status = trim($_POST['status']);
+        $melks = Melk::where([
+            'status' => $status,
+            'Sell_rent' => $Sell_rent,
+            'district' => $district,
+            ])->get();
+
         foreach($melks as $melk) {
             $melk_id = $melk->id;
             $image = Image::firstWhere('melk_id', $melk_id);
@@ -102,31 +112,75 @@ class MelkController extends HomeController
                     <div class='col-xs-6 col-md-3'>
                         <dive class='thumbnail'>
                             <img src='assets/images/$image->image' width='400' height='250'><br>
-                            <h4>$melk->Address</h4>
-                            <h4>$melk->Meterage متر-$melk->Rooms خوابه</h4>
-                            <form action='melkInformation' method='POST'>
-                                <input type='hidden' name='id' value= $melk->id>
-                                <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
-                            </form>
+                            <h4>$melk->Address</h4>";
+                            if($melk->status == 'آپارتمان' || $melk->status == 'خانه و ویلا' ){
+                                echo " <b>$melk->status:</b> $melk->Meterage متر-$melk->Rooms خوابه
+                                <form action='melkInformation' method='POST'>
+                                    <input type='hidden' name='id' value= $melk->id>
+                                    <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
+                                </form>
+                            </div>
                         </div>
                     </div>
+                    ";  
+                    }elseif($melk->status == 'دفتر کار' || $melk->status == 'تجاری' ){
+                        echo " <b>$melk->status:</b> $melk->Meterage متر-$melk->Rooms اتاق
+                        <form action='melkInformation' method='POST'>
+                            <input type='hidden' name='id' value= $melk->id>
+                            <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
+                        </form>
+                    </div>
                 </div>
-                ";            
-            }else{
+                </div>
+                ";  
+                }else{
+                echo " <b>$melk->status:</b> $melk->Meterage متری
+                        <form action='melkInformation' method='POST'>
+                            <input type='hidden' name='id' value= $melk->id>
+                            <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
+                        </form>
+                    </div>
+                </div>
+                </div>
+                ";  
+                }                  
+                }else{
                 echo "
                 <div class='form-group'>
                     <div class='col-xs-6 col-md-3'>
                         <dive class='thumbnail'>
-                            <h4>$melk->Address</h4>
-                            <h4>$melk->Meterage متر-$melk->Rooms خوابه</h4>
-                            <form action='melkInformation' method='POST'>
-                                <input type='hidden' name='id' value= $melk->id>
-                                <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
-                            </form>
+                            <h4>$melk->Address</h4>";
+                                if($melk->status == 'آپارتمان' || $melk->status == 'خانه و ویلا' ){
+                                echo " <b>$melk->status:</b> $melk->Meterage متر-$melk->Rooms خوابه
+                                <form action='melkInformation' method='POST'>
+                                    <input type='hidden' name='id' value= $melk->id>
+                                    <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
+                                </form>
+                            </div>
                         </div>
                     </div>
+                    ";  
+                    }elseif($melk->status == 'دفتر کار' || $melk->status == 'تجاری' ){
+                        echo " <b>$melk->status:</b> $melk->Meterage متر-$melk->Rooms اتاق
+                        <form action='melkInformation' method='POST'>
+                            <input type='hidden' name='id' value= $melk->id>
+                            <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
+                        </form>
+                    </div>
                 </div>
-                ";            
+                </div>
+                ";  
+                }else{
+                echo " <b>$melk->status:</b> $melk->Meterage متری
+                        <form action='melkInformation' method='POST'>
+                            <input type='hidden' name='id' value= $melk->id>
+                            <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
+                        </form>
+                    </div>
+                </div>
+                </div>
+                ";  
+                }                                   
             }
         }
     }
@@ -144,37 +198,81 @@ class MelkController extends HomeController
             foreach($melks as $melk) {
                 $melk_id = $melk->id;
                 $image = Image::firstWhere('melk_id', $melk_id);
-            if($image){
+                if($image){
                     echo "
                     <div class='form-group'>
                         <div class='col-xs-6 col-md-3'>
                             <dive class='thumbnail'>
                                 <img src='assets/images/$image->image' width='400' height='250'><br>
-                                <h4>$melk->Address</h4>
-                                <h4>$melk->Meterage متر-$melk->Rooms خوابه</h4>
-                                <form action='melkInformation' method='POST'>
-                                    <input type='hidden' name='id' value= $melk->id>
-                                    <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
-                                </form>
+                                <h4>$melk->Address</h4>";
+                                if($melk->status == 'آپارتمان' || $melk->status == 'خانه و ویلا' ){
+                                    echo " <b>$melk->status:</b> $melk->Meterage متر-$melk->Rooms خوابه
+                                    <form action='melkInformation' method='POST'>
+                                        <input type='hidden' name='id' value= $melk->id>
+                                        <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
+                                    </form>
+                                </div>
                             </div>
                         </div>
+                        ";  
+                        }elseif($melk->status == 'دفتر کار' || $melk->status == 'تجاری' ){
+                            echo " <b>$melk->status:</b> $melk->Meterage متر-$melk->Rooms اتاق
+                            <form action='melkInformation' method='POST'>
+                                <input type='hidden' name='id' value= $melk->id>
+                                <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
+                            </form>
+                        </div>
                     </div>
-                    ";            
-                }else{
+                    </div>
+                    ";  
+                    }else{
+                    echo " <b>$melk->status:</b> $melk->Meterage متری
+                            <form action='melkInformation' method='POST'>
+                                <input type='hidden' name='id' value= $melk->id>
+                                <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                    ";  
+                    }                  
+                    }else{
                     echo "
                     <div class='form-group'>
                         <div class='col-xs-6 col-md-3'>
                             <dive class='thumbnail'>
-                                <h4>$melk->Address</h4>
-                                <h4>$melk->Meterage متر-$melk->Rooms خوابه</h4>
-                                <form action='melkInformation' method='POST'>
-                                    <input type='hidden' name='id' value= $melk->id>
-                                    <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
-                                </form>
+                                <h4>$melk->Address</h4>";
+                                    if($melk->status == 'آپارتمان' || $melk->status == 'خانه و ویلا' ){
+                                    echo " <b>$melk->status:</b> $melk->Meterage متر-$melk->Rooms خوابه
+                                    <form action='melkInformation' method='POST'>
+                                        <input type='hidden' name='id' value= $melk->id>
+                                        <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
+                                    </form>
+                                </div>
                             </div>
                         </div>
+                        ";  
+                        }elseif($melk->status == 'دفتر کار' || $melk->status == 'تجاری' ){
+                            echo " <b>$melk->status:</b> $melk->Meterage متر-$melk->Rooms اتاق
+                            <form action='melkInformation' method='POST'>
+                                <input type='hidden' name='id' value= $melk->id>
+                                <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
+                            </form>
+                        </div>
                     </div>
-                    ";            
+                    </div>
+                    ";  
+                    }else{
+                    echo " <b>$melk->status:</b> $melk->Meterage متری
+                            <form action='melkInformation' method='POST'>
+                                <input type='hidden' name='id' value= $melk->id>
+                                <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                    ";  
+                    }                                   
                 }
             }
     }
@@ -329,6 +427,7 @@ class MelkController extends HomeController
                     }
                     $_SESSION['message'] = 'ملک شما با موفقیت ثبت شد';
                     $this->render('front/melk/melkRegister');
+
                 } else {
                     Melk::insert([
                         'owner' => $owner,

@@ -71,8 +71,8 @@
             </div>
         </ul>
         <ul class="nav navbar-nav navbar-left">
-            <li class="nav navbar-nav">
-                <a href="#login" data-toggle="modal" class="btn-lg modal-open" style="color:blue; margin:0;">ورود</a>
+            <li class="nav navbar-nav form-group">
+                    <a href="#login" data-toggle="modal" class="btn-lg modal-open">ورود<i class="fa fa-sign-in"></i></a>
             </li>
             <li class="nav navbar-nav">
                 <a href="#Advertising" data-toggle="modal" class="btn alert-danger btn-lg modal-open"

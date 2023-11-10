@@ -28,6 +28,7 @@
     <script type="text/javascript" src="assets/js/scripts/search.js"></script>
     <script type="text/javascript" src="assets/js/scripts/enterCode.js"></script>
     <script type="text/javascript" src="assets/js/scripts/submenu.js"></script>
+    <script type="text/javascript" src="assets/js/scripts/thumbnailClick.js"></script>
     <script type="text/javascript" src="assets/js/scripts/positioning.js"></script>
     <script type="text/javascript" src="assets/js/scripts/location.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

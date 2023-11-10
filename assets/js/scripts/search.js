@@ -21,30 +21,32 @@ $(document).ready(function () {
               $(this).css("color", "black");
             }
           );
-          $("#mycard span").click(function () {
-            var span_class = $(this).attr("class");
+          $("#mycard p").click(function () {
+            var span_class = $(this).find('span').attr("class");
             if (span_class == "district") {
-              data = $(this).html();
+              var district = $(this).find('span').attr("district");
+              var status = $(this).find('span').attr("id");
+              var Sell_rent = $(this).find('span').attr("name");
               $.ajax({
                 type: "POST",
                 url: "/districtSearch",
-                data: { district: data },
+                data: { status: status, Sell_rent: Sell_rent, district: district},
                 success: function (result) {
-                  $("#mysearch").html(result);
+                  $("#mysearch").html(result).css("cursor", "pointer");
                 },
               });
             } else {
-              var status = $(this).attr("id");
-              var Sell_rent = $(this).attr("class");
+              var status = $(this).find('span').attr("id");
+              var Sell_rent = $(this).find('span').attr("class");
               $.ajax({
                 type: "POST",
                 url: "/statusSearch",
                 data: { status: status, Sell_rent: Sell_rent },
                 success: function (result) {
                   if (result != "") {
-                    $("#mysearch").html(result);
+                    $("#mysearch").html(result).css("cursor", "pointer");
                   } else {
-                    $("#mysearch").html("موردی یافت نشد!");
+                    $("#mysearch").html('<div class = "alert alert-danger">موردی یافت نشد!</div>');
                   }
                 },
               });

@@ -31,7 +31,7 @@ $(document).ready(function () {
               $("a[href='#Advertising']").attr('href','/melkRegister');
               $(tagA).html("خروج").css('color','red');
             } else {
-              $(modal).find("#display").html(result);
+              $(modal).find("#display").html('کد وارد شده اشتباه است');
             }
           },
         });
