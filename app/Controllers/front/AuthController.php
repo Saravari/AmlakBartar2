@@ -2,10 +2,11 @@
 
 namespace App\Controllers\front;
 
+use App\Controllers\front\EmailController as Email;
 use Rakit\Validation\Validator;
 use App\Models\User;
 
-class AuthController extends HomeController
+class AuthController extends Controller
 {
     public function login()
     {
@@ -14,7 +15,7 @@ class AuthController extends HomeController
         if($user) {
             $code = rand(10000, 99999);
             $_SESSION['code'] = $code;
-            $msg = $this->sendEmail($email, $code);
+            $msg = Email::sendEmail($email, $code);
             if($msg) {
                 $_SESSION['user_id'] = $user->id;
                 echo $msg;
@@ -114,8 +115,7 @@ class AuthController extends HomeController
     public function logOut()
     {
         session_destroy();
-        $this->render('front/home');
-    
+        header("location:/");
     }
 
 }

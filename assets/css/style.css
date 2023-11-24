@@ -3,9 +3,6 @@
     src: url('../fonts/Iranian Sans.ttf');
     font: weight normal;
 }
-*{  
-	margin: 0;
-}
 ul{
 	margin: 0;
 	padding: 0;
@@ -16,7 +13,7 @@ ul{
 	height: auto;
 	position: absolute;
 	top: 10px;
-	right: 160px;
+	right: 163px;
     display: none;
 }
 .submenu li{
@@ -54,7 +51,7 @@ ul{
 	padding-left: 15px;
 	position: absolute;
 	top: 45px;
-	right: 220px;
+	right: 185px;
 	border-radius: 5px;
 	z-index: 1;
 }
@@ -67,5 +64,26 @@ ul{
 }
 #mysearch .thumbnail{
 	cursor: pointer;
+}
+.sidebar{
+	display: inline;
+	width: 150px;
+	height: 100vh;
+	background:lightgray;
+	position: fixed;
+	box-sizing: border-box;
+	padding: 10px;
+}
+input[id=search]{
+	width: 100%;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 16px;
+	background-color: white;
+	background-image: url('https://www.w3schools.com/css/searchicon.png');
+	background-position: 5px 5px; 
+	background-repeat: no-repeat;
+	padding: 12px 20px 12px 20px;
 }
 

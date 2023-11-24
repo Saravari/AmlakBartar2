@@ -6,7 +6,7 @@ use Rakit\Validation\Validator;
 use App\Models\Melk;
 use App\Models\Image;
 
-class MelkController extends HomeController
+class MelkController extends Controller
 {
     public function showInformation()
     {
@@ -110,14 +110,13 @@ class MelkController extends HomeController
                 echo "
                 <div class='form-group'>
                     <div class='col-xs-6 col-md-3'>
-                        <dive class='thumbnail'>
-                            <img src='assets/images/$image->image' width='400' height='250'><br>
+                        <div class='thumbnail'>
+                            <img src='assets/images/$image->image' style='width: 350px; height: 200px;'><br>
                             <h4>$melk->Address</h4>";
                             if($melk->status == 'آپارتمان' || $melk->status == 'خانه و ویلا' ){
                                 echo " <b>$melk->status:</b> $melk->Meterage متر-$melk->Rooms خوابه
-                                <form action='melkInformation' method='POST'>
+                                <form id='formsubmit' action='melkInformation' method='POST'>
                                     <input type='hidden' name='id' value= $melk->id>
-                                    <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
                                 </form>
                             </div>
                         </div>
@@ -125,9 +124,8 @@ class MelkController extends HomeController
                     ";  
                     }elseif($melk->status == 'دفتر کار' || $melk->status == 'تجاری' ){
                         echo " <b>$melk->status:</b> $melk->Meterage متر-$melk->Rooms اتاق
-                        <form action='melkInformation' method='POST'>
+                        <form id='formsubmit' action='melkInformation' method='POST'>
                             <input type='hidden' name='id' value= $melk->id>
-                            <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
                         </form>
                     </div>
                 </div>
@@ -135,26 +133,24 @@ class MelkController extends HomeController
                 ";  
                 }else{
                 echo " <b>$melk->status:</b> $melk->Meterage متری
-                        <form action='melkInformation' method='POST'>
+                        <form id='formsubmit' action='melkInformation' method='POST'>
                             <input type='hidden' name='id' value= $melk->id>
-                            <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
                         </form>
                     </div>
                 </div>
                 </div>
                 ";  
                 }                  
-                }else{
+            }else{
                 echo "
                 <div class='form-group'>
                     <div class='col-xs-6 col-md-3'>
-                        <dive class='thumbnail'>
+                        <div class='thumbnail'>
                             <h4>$melk->Address</h4>";
                                 if($melk->status == 'آپارتمان' || $melk->status == 'خانه و ویلا' ){
                                 echo " <b>$melk->status:</b> $melk->Meterage متر-$melk->Rooms خوابه
-                                <form action='melkInformation' method='POST'>
+                                <form id='formsubmit' action='melkInformation' method='POST'>
                                     <input type='hidden' name='id' value= $melk->id>
-                                    <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
                                 </form>
                             </div>
                         </div>
@@ -162,9 +158,8 @@ class MelkController extends HomeController
                     ";  
                     }elseif($melk->status == 'دفتر کار' || $melk->status == 'تجاری' ){
                         echo " <b>$melk->status:</b> $melk->Meterage متر-$melk->Rooms اتاق
-                        <form action='melkInformation' method='POST'>
+                        <form id='formsubmit' action='melkInformation' method='POST'>
                             <input type='hidden' name='id' value= $melk->id>
-                            <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
                         </form>
                     </div>
                 </div>
@@ -172,9 +167,8 @@ class MelkController extends HomeController
                 ";  
                 }else{
                 echo " <b>$melk->status:</b> $melk->Meterage متری
-                        <form action='melkInformation' method='POST'>
+                        <form id='formsubmit' action='melkInformation' method='POST'>
                             <input type='hidden' name='id' value= $melk->id>
-                            <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
                         </form>
                     </div>
                 </div>
@@ -202,14 +196,13 @@ class MelkController extends HomeController
                     echo "
                     <div class='form-group'>
                         <div class='col-xs-6 col-md-3'>
-                            <dive class='thumbnail'>
-                                <img src='assets/images/$image->image' width='400' height='250'><br>
+                            <div class='thumbnail'>
+                                <img src='assets/images/$image->image' style='width: 350px; height: 200px;'><br>
                                 <h4>$melk->Address</h4>";
                                 if($melk->status == 'آپارتمان' || $melk->status == 'خانه و ویلا' ){
                                     echo " <b>$melk->status:</b> $melk->Meterage متر-$melk->Rooms خوابه
-                                    <form action='melkInformation' method='POST'>
+                                    <form id='formsubmit' action='melkInformation' method='POST'>
                                         <input type='hidden' name='id' value= $melk->id>
-                                        <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
                                     </form>
                                 </div>
                             </div>
@@ -217,9 +210,8 @@ class MelkController extends HomeController
                         ";  
                         }elseif($melk->status == 'دفتر کار' || $melk->status == 'تجاری' ){
                             echo " <b>$melk->status:</b> $melk->Meterage متر-$melk->Rooms اتاق
-                            <form action='melkInformation' method='POST'>
+                            <form id='formsubmit' action='melkInformation' method='POST'>
                                 <input type='hidden' name='id' value= $melk->id>
-                                <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
                             </form>
                         </div>
                     </div>
@@ -227,26 +219,24 @@ class MelkController extends HomeController
                     ";  
                     }else{
                     echo " <b>$melk->status:</b> $melk->Meterage متری
-                            <form action='melkInformation' method='POST'>
+                            <form id='formsubmit' action='melkInformation' method='POST'>
                                 <input type='hidden' name='id' value= $melk->id>
-                                <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
                             </form>
                         </div>
                     </div>
                     </div>
                     ";  
                     }                  
-                    }else{
+                }else{
                     echo "
                     <div class='form-group'>
                         <div class='col-xs-6 col-md-3'>
-                            <dive class='thumbnail'>
+                            <div class='thumbnail'>
                                 <h4>$melk->Address</h4>";
                                     if($melk->status == 'آپارتمان' || $melk->status == 'خانه و ویلا' ){
                                     echo " <b>$melk->status:</b> $melk->Meterage متر-$melk->Rooms خوابه
-                                    <form action='melkInformation' method='POST'>
+                                    <form id='formsubmit' action='melkInformation' method='POST'>
                                         <input type='hidden' name='id' value= $melk->id>
-                                        <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
                                     </form>
                                 </div>
                             </div>
@@ -254,9 +244,8 @@ class MelkController extends HomeController
                         ";  
                         }elseif($melk->status == 'دفتر کار' || $melk->status == 'تجاری' ){
                             echo " <b>$melk->status:</b> $melk->Meterage متر-$melk->Rooms اتاق
-                            <form action='melkInformation' method='POST'>
+                            <form id='formsubmit' action='melkInformation' method='POST'>
                                 <input type='hidden' name='id' value= $melk->id>
-                                <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
                             </form>
                         </div>
                     </div>
@@ -264,9 +253,8 @@ class MelkController extends HomeController
                     ";  
                     }else{
                     echo " <b>$melk->status:</b> $melk->Meterage متری
-                            <form action='melkInformation' method='POST'>
+                            <form id='formsubmit' action='melkInformation' method='POST'>
                                 <input type='hidden' name='id' value= $melk->id>
-                                <input type='submit' class='alert-info' value='اطلاعات بیشتر'>
                             </form>
                         </div>
                     </div>

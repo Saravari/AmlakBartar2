@@ -20,15 +20,15 @@
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 </head>
 
-<body class="container-fluid">
+<body>
     @yield('content')
 
     <script type="text/javascript" src="assets/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="assets/js/scripts/thumbnailClick.js"></script>
     <script type="text/javascript" src="assets/js/scripts/login.js"></script>
     <script type="text/javascript" src="assets/js/scripts/search.js"></script>
     <script type="text/javascript" src="assets/js/scripts/enterCode.js"></script>
     <script type="text/javascript" src="assets/js/scripts/submenu.js"></script>
-    <script type="text/javascript" src="assets/js/scripts/thumbnailClick.js"></script>
     <script type="text/javascript" src="assets/js/scripts/positioning.js"></script>
     <script type="text/javascript" src="assets/js/scripts/location.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

@@ -5,7 +5,7 @@ namespace AmlakBartar;
 use Rakit\Validation\Validator;
 use AmlakBartar\Models\User;
 
-class RegisterController extends HomeController
+class RegisterController extends Controller
 {
     public function register()
     {

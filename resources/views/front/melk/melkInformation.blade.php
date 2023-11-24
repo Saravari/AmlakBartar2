@@ -11,8 +11,16 @@
         <div class="form col-xs-8 col-sm-8" style="background-color:DarkGray; border-radius: 5px;">
             <div class="form col-xs-2 col-sm-4" style="background-color:DarkGray;">
                 <h4 style="color:blue;">مورد: {{$melk->Sell_rent}}</h4>
+                @if($melk->status == 'دفتر کار')
+                <b>{{$melk->status}}:</b> {{$melk->Meterage}}متر، {{$melk->Rooms}} اتاق
+                @endif
+                @if($melk->status == 'مغازه' || $melk->status == 'تجاری')
+                <b>{{$melk->status}}:</b> {{$melk->Meterage}} متری
+                @endif
+                @if($melk->status == 'آپارتمان' || $melk->status == 'خانه و ویلا' )
+                <b>{{$melk->status}}:</b> {{$melk->Meterage}}متر، {{$melk->Rooms}} خوابه
+                @endif
                 <h4>{{$melk->Address}}</h4>
-                <h4>{{$melk->Meterage}}متر {{$melk->Rooms}} خوابه</h4>
                 <h4>سال ساخت: {{$melk->Construction}}
                 </h4>
                 <h4>جهت: {{$melk->Direction}}
@@ -54,14 +62,14 @@
                     <div class="carousel-inner" role="listbox">
                         @foreach($_SESSION['image'] as $image)
                         <div class="item active">
-                            <img src="assets/images/{{$image->image}}" width="400" height="250">
+                            <img src="assets/images/{{$image->image}}" style='width: 400px; height: 250px;'>
                         </div>
                         @break
                         @endforeach
 
                         @foreach($_SESSION['image'] as $image)
                         <div class="item">
-                            <img src="assets/images/{{$image->image}}" width="400" height="250">
+                            <img src="assets/images/{{$image->image}}" style='width: 400px; height: 250px;'>
                         </div>
                         @endforeach
 

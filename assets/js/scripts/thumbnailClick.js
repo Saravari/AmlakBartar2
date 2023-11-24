@@ -1,8 +1,5 @@
 $(document).ready(function(){
-    $("#mysearch .thumbnail").click(function(e){
-        $("#dropdown").css("display", "none");
-        $("#search").css("display", "none"); 
+    $(".thumbnail").click(function(){
         $(this).find("#formsubmit").submit();
-        
     });
 });

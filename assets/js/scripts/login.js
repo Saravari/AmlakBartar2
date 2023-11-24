@@ -7,12 +7,15 @@ $(document).ready(function () {
       },
       600
     );
+    $(modal).find("input").keyup(function(){
+      $(modal).find("#display").html("");
+    });
     $(modal)
       .find(".close")
       .click(function () {
         $(modal).find("#display").html("");
         $(modal).find("#email").val("");
-      });
+      }); 
     $(modal)
       .find("#send")
       .click(function () {
@@ -20,6 +23,7 @@ $(document).ready(function () {
         if (email == "") {
           $(modal).find("#display").html("لطفا ایمیل را وارد کنید");
         } else {
+          $(modal).find("#display").html("");
           $.ajax({
             type: "POST",
             url: "/login",
