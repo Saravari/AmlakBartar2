@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
-        <div class="navbar-header" style="padding-top:7px">
+        <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar"
                 aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -8,10 +8,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/" style="color:steelblue;">املاک برتر</a>
+            <a class="navbar-brand" href="/">املاک برتر</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav" style="padding-top:7px">
+            <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                         aria-expanded="false">دسته ها<span class="caret"></span></a>
@@ -65,17 +65,16 @@
                         </li>
                     </ul>
             </ul>
-            <ul class="nav navbar-form">
-                <li class="form-group" style="padding-top:7px">
+            <ul class="navbar-form">
+                <li class="form-group">
                     <input type="text" id="search" name="search" class="form-control" placeholder="همه آگهی ها">
                 </li>
                 <ul class="navbar-left">
                     <li class="form-group">
-                        <a href="#login" data-toggle="modal" class="btn-lg modal-open">ورود<i class="fa fa-sign-in"></i></a>
+                        <a href="#login" data-toggle="modal" class="modal-open">ورود<i class="fa fa-sign-in"></i></a>
                     </li>
                     <li class="form-group">
-                        <a href="#Advertising" data-toggle="modal" class="btn btn-info btn-lg modal-open"
-                            style="color:blue;">ثبت آگهی</a>
+                        <a href="#Advertising" data-toggle="modal" class="btn btn-default modal-open">ثبت آگهی</a>
                     </li>
                 </ul>
             </ul>
@@ -139,11 +138,9 @@
                 <h4 class="modal-title">وارد کردن کد تایید</h4>
             </div>
             <div class="modal-body">
-                <p>کد تایید را وارد کنید</p>
-
+                <div id="display"></div>
                 <div class="form-group">
                     <input type="code" class="form-control" placeholder="کد تایید" id="code" name="code">
-                    <div id="display" style="color:red;"></div>
                 </div>
                 <div class="row modal-footer">
                     <button type="submit" id="send" class="btn btn-primary">تایید</button>

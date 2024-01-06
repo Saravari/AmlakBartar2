@@ -5,7 +5,6 @@
 
 @section('content')
 
-@include('front.navbar')
 <div id="mysearch" style="justify-content:center; margin-top:10px">
     <div class="form-group">
         @foreach($_SESSION['melks'] as $melk)

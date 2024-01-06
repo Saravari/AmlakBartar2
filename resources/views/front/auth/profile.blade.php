@@ -5,8 +5,6 @@
 
 @section('content')
 
-    @include('users.navbar')
-
     <section style="display:flex; margin-top:50px; justify-content:center;">
             @include('users.error')
             @include('users.message')

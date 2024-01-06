@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-@include('front.nav')
+
 <section style="display:flex; margin-top:10px; justify-content:center;">
     @include('front.error')
     @include('front.message')

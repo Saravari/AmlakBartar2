@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-@include('users.navbar')
+
 <section  style="display:flex; margin-top:50px; justify-content:center;">
                     <div class="form col-xs-8 col-sm-10" style="background-color:DarkGray; border-radius: 5px;">
                         @if($melks)                        

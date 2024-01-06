@@ -5,8 +5,6 @@
 
 @section('content')
 
-@include('users.navbar')
-
 <section  style="display:flex; margin-top:50px; justify-content:center;">
 <div class="col-xs-8 col-sm-4">
     @include('users.messages')

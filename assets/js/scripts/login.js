@@ -7,15 +7,17 @@ $(document).ready(function () {
       },
       600
     );
-    $(modal).find("input").keyup(function(){
-      $(modal).find("#display").html("");
-    });
+    $(modal)
+      .find("input")
+      .keyup(function () {
+        $(modal).find("#display").html("");
+      });
     $(modal)
       .find(".close")
       .click(function () {
         $(modal).find("#display").html("");
         $(modal).find("#email").val("");
-      }); 
+      });
     $(modal)
       .find("#send")
       .click(function () {
@@ -29,19 +31,26 @@ $(document).ready(function () {
             url: "/login",
             data: { email: email },
             cache: false,
-            success: function (result) {
-              if (result == "true") {
+            success: function (response) {
+              var jsonData = JSON.parse(response);
+              if (jsonData.result == true) {
                 $(modal).modal("hide");
                 $("input#temp").val(modal);
                 $("#enterCode").modal("show");
+                $("#enterCode")
+                  .find("#display")
+                  .html(jsonData.msg)
+                  .css("color", "blue");
                 $("#enterCode").animate(
                   {
                     top: "20%",
                   },
                   600
                 );
+              } else if (jsonData.result == false) {
+                $(modal).find("#display").html(jsonData.msg);
               } else {
-                $(modal).find("#display").html(result);
+                $(modal).find("#display").html(jsonData.msg);
               }
             },
           });

@@ -11,8 +11,7 @@ class EmailController extends Controller
     public function sendEmail($to, $code)
     {
 
-        $mail = new PHPMailer(true);
-
+        $mail = new PHPMailer(true);      
         $mail->isSMTP();
         $mail->Host = 'sandbox.smtp.mailtrap.io';
         $mail->SMTPAuth = true;
@@ -28,9 +27,9 @@ class EmailController extends Controller
         $mail->Body = " your Verification code: $code";
         try {
             $mail->send();
-            $msg = 'true';
-        } catch (Exception $e) {
-            $msg = 'false';
+            $msg = 'sended email';
+        } catch (Exception $e) { 
+            $msg = 'error: '.$e->getMessage();
         }
 
         return $msg;

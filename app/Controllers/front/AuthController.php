@@ -10,19 +10,28 @@ class AuthController extends Controller
 {
     public function login()
     {
+        $jsonData = [];
         $email = trim($_POST['email']);
         $user = User::firstWhere('email', $email);
         if($user) {
             $code = rand(10000, 99999);
             $_SESSION['code'] = $code;
-            $msg = Email::sendEmail($email, $code);
-            if($msg) {
+            $result = Email::sendEmail($email, $code);
+           if($result == 'sended email') {
                 $_SESSION['user_id'] = $user->id;
-                echo $msg;
+                $jsonData['result'] = true;
+                $jsonData['msg'] = 'کد تایید به ایمیل شما فرستاده شد';
+                $msg = json_encode($jsonData);
+            }else{
+                $jsonData['result'] = false;
+                $jsonData['msg'] = 'خطایی رخ داده است: '.$result; 
+                $msg = json_encode($jsonData);  
             }
         } else {
-            echo "این ایمیل موجود نیست!";
+            $jsonData['msg'] = 'این ایمیل موجود نیست!';
+            $msg = json_encode($jsonData);
         }
+        echo $msg;
     }
 
     public function checkCode()

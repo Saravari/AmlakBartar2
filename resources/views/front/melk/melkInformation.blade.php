@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-@include('front.navbar')
+
 <div id="mysearch" style="justify-content:center; margin-top:10px">
     <div style=" display:flex; justify-content:center; margin-top:50px;">
         @foreach($_SESSION['melk'] as $melk)
